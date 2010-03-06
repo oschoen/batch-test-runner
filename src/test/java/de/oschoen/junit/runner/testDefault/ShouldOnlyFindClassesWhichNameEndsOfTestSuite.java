@@ -1,9 +1,8 @@
-package de.oschoen.junit;
+package de.oschoen.junit.runner.testDefault;
 
 import de.oschoen.junit.runner.BatchTestRunner;
 import org.junit.runner.RunWith;
 
 @RunWith(BatchTestRunner.class)
-@BatchTestRunner.BatchTestExclude("*DontFindThisTest.class")
-public class AllTests {
+public class ShouldOnlyFindClassesWhichNameEndsOfTestSuite {
 }

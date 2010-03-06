@@ -1,11 +1,11 @@
-package de.oschoen.junit;
+package de.oschoen.junit.runner.testDefault;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class SimpleTest {
+public class ShouldBeFoundTest {
 
     @Test
     public void shouldDo() {
