@@ -32,7 +32,7 @@ public class BatchTestRunner extends ParentRunner<Runner> {
         if (annotation != null) {
             return annotation.value();
         } else {
-            return "*Test.class";
+            return "**.*Test";
         }
     }
 
@@ -170,11 +170,17 @@ public class BatchTestRunner extends ParentRunner<Runner> {
             if (file.isDirectory()) {
                 assert !file.getName().contains(".");
                 classes.addAll(findClasses(file, packageName + "." + file.getName(), includePattern, excludePattern));
-            } else if (pathMatcher.match(includePattern, file.getName()) && ! pathMatcher.match(excludePattern, file.getName())) {
-                classes.add(Class.forName(packageName + '.' + file.getName().substring(0, file.getName().length() - 6)));
+            } else if (file.getName().endsWith(".class")) {
+
+                String className = packageName + '.' + file.getName().substring(0, file.getName().length() - 6);
+
+                if (pathMatcher.match(includePattern, className) && !pathMatcher.match(excludePattern, className)) {
+                    classes.add(Class.forName(className));
+                }
             }
         }
         return classes;
     }
+
 
 }

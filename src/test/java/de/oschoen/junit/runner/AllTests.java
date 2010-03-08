@@ -4,6 +4,6 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(BatchTestRunner.class)
-@BatchTestRunner.BatchTestInclude("*Suite.class")
+@BatchTestRunner.BatchTestInclude("**.*Suite")
 public class AllTests {
 }

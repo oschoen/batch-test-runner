@@ -60,12 +60,9 @@ package de.oschoen.junit.runner;
  */
 public class AntPathMatcher {
 
-    /**
-     * Default path separator: "/"
-     */
-    public static final String DEFAULT_PATH_SEPARATOR = "/";
 
-    private String pathSeparator = DEFAULT_PATH_SEPARATOR;
+
+    private String pathSeparator = ".";
 
     public boolean match(String pattern, String path) {
         return doMatch(pattern, path, true);

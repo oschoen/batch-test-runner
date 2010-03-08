@@ -1,4 +1,4 @@
-package de.oschoen.junit.runner.testExclude;
+package de.oschoen.junit.runner.testExcludeClass;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package de.oschoen.junit.runner.testInclude;
+package de.oschoen.junit.runner.testIncludeClass;
 
 import org.junit.Test;
 
