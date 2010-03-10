@@ -1,3 +1,22 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package de.oschoen.junit.runner;
 
 import org.junit.runner.Description;
@@ -15,6 +34,47 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+/**
+ *
+ * Define a junit 4 test suite based on pattern matching.
+ *
+ * <h2>Examples</h2>
+ *
+ * Find all classes in package com.example and sub packages, whose name ends with Test.
+ *
+ * <pre>
+ * package com.example;
+ *
+ * import org.junit.runner.RunWith;
+ *
+ * &#64;RunWith(de.oschoen.junit.runner.BatchTestRunner.class)
+ * public class AllTests { }
+ * </pre>
+ *
+ * Find all classes in package com.example and sub packages, whose name ends with Suite.
+ *
+ * <pre>
+ * package com.example;
+ *
+ * import org.junit.runner.RunWith;
+ *
+ * &#64;RunWith(de.oschoen.junit.runner.BatchTestRunner.class)
+ * &#64;BatchTestRunner.BatchTestInclude("**.*Suite")
+ * public class AllTests {}
+ * </pre>
+ *
+ * Exclude a package:
+ *
+ * <pre>
+ * package com.example;
+ *
+ * import org.junit.runner.RunWith;
+ *
+ * &#64;RunWith(de.oschoen.junit.runner.BatchTestRunner.class)
+ * &#64;BatchTestRunner.BatchTestExclude("**.shouldBeIgnored.**")
+ * public class AllTests {}
+ * </pre>
+ */
 public class BatchTestRunner extends ParentRunner<Runner> {
 
     @Retention(RetentionPolicy.RUNTIME)
@@ -41,7 +101,7 @@ public class BatchTestRunner extends ParentRunner<Runner> {
     @Inherited
     public @interface BatchTestExclude {
         /**
-         * @return the include pattern
+         * @return the exclude pattern
          */
         public String value();
     }
@@ -122,7 +182,7 @@ public class BatchTestRunner extends ParentRunner<Runner> {
     }
 
     /**
-     * Scans all classes accessible from the context class loader which belong to the given package and subpackages.
+     * Scans all classes accessible from the class loader which belong to the given package and subpackages.
      *
      * @param suiteClass The suite class
      * @return The classes
